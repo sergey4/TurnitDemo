@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Turnit Demo</string>
+    <string name="button_add">Add</string>
+    <string name="button_delete_all">Delete all</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="label_name">Name</string>
+    <string name="label_age">Age</string>
+    <string name="title_delete_all">Delete</string>
+    <string name="text_list_is_empty">List is empty</string>
+    <string name="text_confirm_delete_all">Do you want to delete all records?</string>
+</resources>
