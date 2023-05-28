@@ -1,6 +1,5 @@
 package com.example.turnitdemo.viewmodel
 
-import android.os.Looper
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -14,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class PersonListViewModel @Inject constructor(
@@ -43,7 +43,7 @@ class PersonListViewModel @Inject constructor(
         viewModelScope.launch {
             repository.addPerson(personToAdd)
             // also clear input
-            _state.value = _state.value.copy(isLoading = false, nameText = "", ageText = "")
+            _state.value = _state.value.copy(isLoading = false, nameText = "")
         }
     }
 
@@ -73,12 +73,6 @@ class PersonListViewModel @Inject constructor(
         }
     }
 
-    fun onAgeTextChange(text: String) {
-        if (text.length <= 3) {
-            _state.value = _state.value.copy(ageText = text.filter { it.isDigit() })
-        }
-    }
-
     private fun observeDb() {
         viewModelScope.launch {
             repository.observeDatabase().collect { persons ->
@@ -89,13 +83,7 @@ class PersonListViewModel @Inject constructor(
 
     private fun getPersonDataFromInput(): Person? {
         val currentState = _state.value
-        return try {
-            val name = currentState.nameText
-            val age = currentState.ageText.toInt()
-            Person(fullName = name, age = age)
-        } catch (e: Exception) {
-            Log.e(tag, "error = $e")
-            null
-        }
+        if (currentState.nameText.isBlank()) return null
+        return Person(fullName = currentState.nameText, age = Random.nextInt(0, 100))
     }
 }

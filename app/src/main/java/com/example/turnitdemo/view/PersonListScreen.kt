@@ -66,9 +66,7 @@ fun PersonListScreen(
         ) {
             NameInputPanel(
                 nameText = state.value.nameText,
-                ageText = state.value.ageText,
                 onNameTextChange = { text -> viewModel.onNameTextChange(text) },
-                onAgeTextChange = { text -> viewModel.onAgeTextChange(text) },
                 isLoading = state.value.isLoading,
                 isAddButtonEnabled = state.value.isAddButtonEnabled,
                 isDeleteButtonEnabled = listState.value.persons.isNotEmpty(),
@@ -92,9 +90,7 @@ fun PersonListScreen(
 @Composable
 private fun NameInputPanel(
     nameText: String,
-    ageText: String,
     onNameTextChange: (String) -> Unit,
-    onAgeTextChange: (String) -> Unit,
     isLoading: Boolean,
     isAddButtonEnabled: Boolean,
     isDeleteButtonEnabled: Boolean,
@@ -124,17 +120,9 @@ private fun NameInputPanel(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ){
-            OutlinedTextField(
-                modifier = Modifier.width(100.dp),
-                enabled = !isLoading,
-                value = ageText,
-                onValueChange = { onAgeTextChange(it) },
-                label = { Text(stringResource(id = R.string.label_age)) },
-                maxLines = 1
-            )
             Row(
                 modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End)
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start)
             ){
                 Button(
                     onClick = onAddClick,

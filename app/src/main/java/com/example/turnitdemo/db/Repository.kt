@@ -1,7 +1,5 @@
 package com.example.turnitdemo.db
 
-import android.os.Looper
-import android.util.Log
 import com.example.turnitdemo.di.DispatcherProvider
 import com.example.turnitdemo.entity.Person
 import kotlinx.coroutines.flow.Flow
